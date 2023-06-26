@@ -1,5 +1,6 @@
-<p align="center"><img width="100" src="https://cdn.techinasia.com/data/images/fjt8UjCycbYbjvWOJnm6ZYzLs1ImjMesrAv6oiML.jpeg"></p>
+*Payment Gateway Impor Payment Woocommerce Wordpress Plugin*
 
-# iPaymu-WP-WooCommerce
-WP Woo Commerce Plugin for IPaymu.com Payment Gateway
-# impor-payment-woocommerce-plugin
+Installation 
+>1. Download as ZIP
+>2. Install Plugin On Wordpress
+>3. Have a great day :)
