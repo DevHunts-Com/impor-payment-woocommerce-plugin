@@ -332,6 +332,7 @@ function woocommerce_imporPayment_init()
 
             global $woocommerce;
 
+
             $sandbox_url = 'https://payment.impor.co.id/api/payments';
 
             $production_url = 'https://payment.impor.co.id/api/payments';
@@ -339,6 +340,7 @@ function woocommerce_imporPayment_init()
             $payment_method = get_post_meta($order_id, 'imporpayment_payment_method', true);
 
             $order = new WC_Order($order_id);
+
 
             $url = $production_url;
 
@@ -441,8 +443,6 @@ function woocommerce_imporPayment_init()
         {
 
             global $woocommerce;
-
-
 
             $payload = file_get_contents('php://input');
             $payload = json_decode($payload, true);
