@@ -56,7 +56,7 @@ function woocommerce_imporPayment_init()
             $this->return_url      = $this->settings['return_url'] ?? $returnUrl;
             $this->title        = "Impor Payment";
             $this->description  = $this->settings['description'] ?? '';
-            $this->apikey       = $this->settings['apikey'] ?? '';
+            $this->apiKey       = $this->settings['api_key'] ?? '';
 
             // custom field
             // Add custom field to checkout page
@@ -277,7 +277,7 @@ function woocommerce_imporPayment_init()
                     'description' => '<small>Mode Sandbox/Development digunakan untuk testing transaksi',
                     'default' => 'no'
                 ),
-                'apikey' => array(
+                'api_key' => array(
                     'title' => __('importPayment API Key', 'woothemes'),
                     'type' => 'text',
                     'description' => __('<small>Dapatkan API Key Untuk Mengakses Api Pembayaran</small>.', 'woothemes'),
@@ -346,7 +346,6 @@ function woocommerce_imporPayment_init()
                 $url = $sandbox_url;
             }
 
-
             $items = [];
             foreach ($order->get_items() as $item) {
 
@@ -366,7 +365,6 @@ function woocommerce_imporPayment_init()
             $customer_phone = $order->get_billing_phone();
             $customer_address = $order->get_billing_address_1() . ' ' . $order->get_billing_address_2();
             $data = array(
-                // 'key'      => $this->apikey, // API Key
                 'payment_method' => $payment_method,
                 'invoice_id' => $order_id,
                 'amount'    => $order->get_total(),
@@ -390,7 +388,7 @@ function woocommerce_imporPayment_init()
             // $params_string = http_build_query($data);
             $headers = [
                 'accept: accept: application/json',
-                'Authorization: Bearer ' . $this->apikey,
+                'Authorization: Bearer ' . $this->apiKey,
                 'Content-Type: application/json'
             ];
 
