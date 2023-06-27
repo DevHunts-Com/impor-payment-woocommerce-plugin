@@ -315,8 +315,14 @@ function woocommerce_imporPayment_init()
 
         function payment_fields()
         {
-            if ($this->description)
+            if (!$_GET['pay_for_order']) {
                 echo wpautop(wptexturize($this->add_payment_method_field()));
+            } else {
+                $order_id = wc_get_order_id_by_order_key($_GET['key']);
+                $order = new WC_Order($order_id);
+                $payment_method = $order->get_data()['meta_data'][0]->get_data()['value'];
+                echo wpautop(wptexturize($payment_method));
+            }
             // echo wpautop(wptexturize($this->description));
         }
 
@@ -332,7 +338,6 @@ function woocommerce_imporPayment_init()
 
             global $woocommerce;
 
-
             $sandbox_url = 'https://payment.impor.co.id/api/payments';
 
             $production_url = 'https://payment.impor.co.id/api/payments';
@@ -340,7 +345,6 @@ function woocommerce_imporPayment_init()
             $payment_method = get_post_meta($order_id, 'imporpayment_payment_method', true);
 
             $order = new WC_Order($order_id);
-
 
             $url = $production_url;
 
@@ -385,7 +389,7 @@ function woocommerce_imporPayment_init()
             );
 
 
-            update_post_meta($order_id, 'imporpayment_payment_method', '');
+            // update_post_meta($order_id, 'imporpayment_payment_method', '');
 
             // $params_string = http_build_query($data);
             $headers = [
@@ -443,6 +447,8 @@ function woocommerce_imporPayment_init()
         {
 
             global $woocommerce;
+
+
 
             $payload = file_get_contents('php://input');
             $payload = json_decode($payload, true);
